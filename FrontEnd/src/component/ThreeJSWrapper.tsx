@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { ThreeJSOverlayView } from "@googlemaps/three";
-import { MapSession } from "./MainSession";
+import { MapSession } from "../MainSession";
 
 const mapOptions = {
   tilt: 180,
@@ -23,7 +23,7 @@ interface Location {
   longitude: number;
 }
 
-function GoogleMapsComponent({ location }: { location: Location }) {
+function ThreeJSWrapper({ location }: { location: Location }) {
   const mapRef = useRef<HTMLDivElement>(null); // 지도를 렌더링할 div의 ref.
   const mixer = useRef<THREE.AnimationMixer>();
   const actionMap = useRef<Record<string, THREE.AnimationAction> | undefined>();
@@ -33,12 +33,12 @@ function GoogleMapsComponent({ location }: { location: Location }) {
   const [threeJSOverlayViewInstance, setThreeJSOverlayViewInstance] =
     useState<ThreeJSOverlayView | null>(null);
 
-  const handleTouchStart = (event: TouchEvent) => {
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
     setTouchStart({ x: touch.clientX, y: touch.clientY });
   };
 
-  const handleTouchMove = (event: TouchEvent) => {
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
     setTouchEnd({ x: touch.clientX, y: touch.clientY });
   };
@@ -232,4 +232,4 @@ function GoogleMapsComponent({ location }: { location: Location }) {
   );
 }
 
-export default GoogleMapsComponent;
+export default ThreeJSWrapper;

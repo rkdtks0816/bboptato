@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MainSession } from "./MainSession";
-import GoogleMapsComponent from "./ThreeJSWrapper";
+import ThreeJSWrapper from "./component/ThreeJSWrapper";
 
 function App() {
   const [location, setLocation] = useState<{
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <MainSession>
-      {location && <GoogleMapsComponent location={location} />}
+      {location && <ThreeJSWrapper location={location} />}
     </MainSession>
   );
 }
